@@ -1,0 +1,395 @@
+Script started on Mon Jun 22 18:32:55 2020
+u306024@cse-gw[31]: cat calendar.html
+<!-- 306024海老原毅史 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+	<h1>2020年6月</h1>
+	<table>
+		<tr>
+			<td>
+				<font color=red>日</font>
+			</td>
+			<td>月</td>
+			<td>火</td>
+			<td>水</td>
+			<td>木</td>
+			<td>金</td>
+			<td>土</td>
+		</tr>
+		<tr>
+			<td></td>
+
+			<td align="right">
+
+				1
+
+			</td>
+
+
+			<td align="right">
+
+				2
+
+			</td>
+
+
+			<td align="right">
+
+				3
+
+			</td>
+
+
+			<td align="right">
+
+				4
+
+			</td>
+
+
+			<td align="right">
+
+				5
+
+			</td>
+
+
+			<td align="right">
+
+				6
+
+			</td>
+
+		</tr>
+		<tr>
+
+
+			<td align="right">
+				<font color=red>
+					7
+				</font>
+			</td>
+
+
+			<td align="right">
+
+				8
+
+			</td>
+
+
+			<td align="right">
+
+				9
+
+			</td>
+
+
+			<td align="right">
+
+				10
+
+			</td>
+
+
+			<td align="right">
+
+				11
+
+			</td>
+
+
+			<td align="right">
+
+				12
+
+			</td>
+
+
+			<td align="right">
+
+				13
+
+			</td>
+
+		</tr>
+		<tr>
+
+
+			<td align="right">
+				<font color=red>
+					14
+				</font>
+			</td>
+
+
+			<td align="right">
+
+				15
+
+			</td>
+
+
+			<td align="right">
+
+				16
+
+			</td>
+
+
+			<td align="right">
+
+				17
+
+			</td>
+
+
+			<td align="right">
+
+				18
+
+			</td>
+
+
+			<td align="right">
+
+				19
+
+			</td>
+
+
+			<td align="right">
+
+				20
+
+			</td>
+
+		</tr>
+		<tr>
+
+
+			<td align="right">
+				<font color=red>
+					21
+				</font>
+			</td>
+
+
+			<td align="right">
+
+				22
+
+			</td>
+
+
+			<td align="right">
+
+				23
+
+			</td>
+
+
+			<td align="right">
+
+				24
+
+			</td>
+
+
+			<td align="right">
+
+				25
+
+			</td>
+
+
+			<td align="right">
+
+				26
+
+			</td>
+
+
+			<td align="right">
+
+				27
+
+			</td>
+
+		</tr>
+		<tr>
+
+
+			<td align="right">
+				<font color=red>
+					28
+				</font>
+			</td>
+
+
+			<td align="right">
+
+				29
+
+			</td>
+
+
+			<td align="right">
+
+				30
+
+			</td>
+
+
+		</tr>
+	</table>
+
+	<br />
+	<form action="problem2.html">
+		<input type=submit value="戻る">
+	</form>
+</body>
+
+</html>u306024@cse-gw[32]: cat calendar.jsp
+<!-- 306024海老原毅史 -->
+
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"%>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.time.LocalDate" %>
+<%
+String months = request.getParameter("month");
+String years = request.getParameter("year");
+int month=2;
+int year = 0;
+try{
+	month = Integer.parseInt(months);
+	year = Integer.parseInt(years);
+}catch(NumberFormatException e){
+	out.println("<p>不正な値が入力されました</p>");
+	return;
+}
+if(month < 0||month > 12){
+	out.println("<p>不正な値が入力されました</p>");
+	return;
+}
+LocalDate date = LocalDate.of(year,month,1); //2019年5月1日を表すオブジェクトを作成する
+int len = date.lengthOfMonth();  // 2019年5月の日数を求める
+int youbi = date.getDayOfWeek().getValue(); // 2019年5月1日の曜日を求める 月曜日が1で，日曜日が7
+int i=0,j=0,day=0,daycount=1,weekcount=0,num=0;
+
+%>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html" charset="utf-8">
+	<title>cal</title>
+</head>
+
+<body>
+	<h1><%=year%>年<%=month%>月</h1>
+	<table>
+		<tr>
+			<td>
+				<font color=red>日</font>
+			</td>
+			<td>月</td>
+			<td>火</td>
+			<td>水</td>
+			<td>木</td>
+			<td>金</td>
+			<td>土</td>
+		</tr>
+
+
+		<%
+			out.println("<tr>");
+			if(youbi != 7){
+				for(i = 0 ; i < youbi ; i++ ){
+					out.println("<td></td>");
+				}
+			}
+			
+
+			while(i <=6 ){
+				day++;
+				if(youbi==7&&daycount==1){
+					out.println("<td><font color='red'>" + day + "</font></td>");
+					daycount++;
+				}else{
+					out.println("<td>" + day + "</td>");
+				}
+				i++;
+			}
+
+			out.println("</tr>");
+			
+			num=len-day-28;
+
+			if(num>0){
+				weekcount=5;
+			}else{
+				weekcount=4;
+			}
+
+			for(j = 0;j < weekcount;j++){
+
+				daycount=1;
+				out.println("<tr>");
+
+				for(i = 0; i < 7;i++){
+					day++;
+					if(daycount==1){
+						out.println("<td><font color='red'>" + day + "</font></td>");
+					}else if(day>len){
+						out.println("<td></td>");
+					}else{
+						out.println("<td>" + day + "</td>");
+					}
+					daycount++;
+				}
+
+				out.println("</tr>");
+
+			}
+			%>
+
+
+
+	</table>
+
+	<br />
+	<form action="index.html">
+		<input type=submit value="戻る">
+	</form>
+</body>
+
+</html>u306024@cse-gw[33]: cat index.htl[Kml
+<!-- 306024海老原毅史 -->
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <title>kadai</title>
+</head>
+
+<body>
+    <p>カレンダーを表示する年月を入力してください</p><br>
+    <form action="calendar.jsp" method="get" >
+    年:<input type="text" name="year">
+    月：<input type="text" name="month"><br>
+    <input type="submit" value="OK">
+    </form>
+</body>
+</html>u306024@cse-gw[34]: exit
+exit
+
+Script done on Mon Jun 22 18:33:38 2020

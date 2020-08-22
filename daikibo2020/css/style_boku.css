@@ -1,0 +1,144 @@
+ /* style.css */
+.box3 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #2c2c2f;
+    background: rgba(255, 255, 255, 0.7
+    );/*???*/
+    border: solid 3px rgba(255, 255, 255, 0.7);
+    border-radius: 10px;/*????*/
+}
+
+.box3 p {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("../img/haikei.jpg");
+    background-size: cover;
+    text-align: center;
+}
+
+@-webkit-keyframes blink {
+    0% {color:#e60012;} 8.3% {color:#f39800;} 16.6% {color:#fff100;} 24.9% {color:#009944;} 33.2%{color:#0068b7;} 41.5% {color:#1d2088;} 49.8% {color:#920783;}58.1% {color:#1d2088;} 66.4%{color:#0068b7;} 74.7% {color:#009944;} 83% {color:#fff100;}  91.9% {color:#f39800;} 100% {color:#e60012;}
+ }
+ @keyframes blink {
+    0% {color:#e60012;} 8.3% {color:#f39800;} 16.6% {color:#fff100;} 24.9% {color:#009944;} 33.2%{color:#0068b7;} 41.5% {color:#1d2088;} 49.8% {color:#920783;}58.1% {color:#1d2088;} 66.4%{color:#0068b7;} 74.7% {color:#009944;} 83% {color:#fff100;}  91.9% {color:#f39800;} 100% {color:#e60012;}
+ }
+
+header{
+    font-size: 60px;
+    -webkit-animation: blink 6s infinite;
+    animation: blink 6s infinite;
+    text-align: center;
+    font-family: HGP創英角ﾎﾟｯﾌﾟ体;
+}
+
+table{
+  border-color: #e60012;
+  width: 500px;
+}
+
+#main-box{
+    padding-left: 200px;
+}
+
+p#cful{
+    -webkit-animation: blink 6s infinite;
+    animation: blink 6s infinite;
+}
+
+p{
+    font-size: 20px;
+    color: black;
+}
+
+p#bold{
+  font: 100px;
+  font-style: oblique;
+}
+
+p#big{
+  font-size: 100px;
+}
+
+div.side {
+  float: left;
+  width: 25%;
+}
+
+div.main{
+  float: left;
+  width: 50%;
+}
+
+div.right {
+  float: left;
+  width: 25%;
+}
+
+td.hyo {
+	border: solid 1px;
+  padding: 0.2em;
+
+}
+
+
+p #red{
+  font-size: 20px;
+  color: red;
+}
+
+ .readmore-area {
+    display: none;   /* デフォルトでは非表示にしておく*/
+ }
+
+ .icon-hamburger {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    height: 50px;
+    position: relative;
+    width: 50px;
+    display: none;
+    margin-bottom: 0.4em;
+  }
+
+  .icon-hamburger span {
+    background: #cccccc;
+    display: block;
+    height: 16%;
+    left: 50%;
+    margin: -8% 0 0 -42%;
+    position: absolute;
+    top: 50%;
+    width: 84%;
+  }
+
+  .icon-hamburger span::before,
+  .icon-hamburger span::after {
+    background: #cccccc;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 50%;
+    margin: -8% 0 0 -50%;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+
+  .icon-hamburger span::before {
+    margin-top: -38%;
+  }
+
+  .icon-hamburger span::after {
+    margin-top: 19%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .icon-hamburger {
+      display: inline-block;
+    }
+  }
