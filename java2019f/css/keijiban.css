@@ -1,0 +1,48 @@
+body{
+    background-image: url("../img/haikei.jpg");
+    background-size: cover; 
+    text-align: center;
+    font-family: Quicksand, 游ゴシック体, YuGothic, 'ヒラギノ角ゴシック Pro',メイリオ, Meiryo,'ＭＳ Ｐゴシック', sans-serif;
+}
+
+@-webkit-keyframes blink {
+    0% {color:#e60012;} 8.3% {color:#f39800;} 16.6% {color:#fff100;} 24.9% {color:#009944;} 33.2%{color:#0068b7;} 41.5% {color:#1d2088;} 49.8% {color:#920783;}58.1% {color:#1d2088;} 66.4%{color:#0068b7;} 74.7% {color:#009944;} 83% {color:#fff100;}  91.9% {color:#f39800;} 100% {color:#e60012;}
+ }
+ @keyframes blink {
+    0% {color:#e60012;} 8.3% {color:#f39800;} 16.6% {color:#fff100;} 24.9% {color:#009944;} 33.2%{color:#0068b7;} 41.5% {color:#1d2088;} 49.8% {color:#920783;}58.1% {color:#1d2088;} 66.4%{color:#0068b7;} 74.7% {color:#009944;} 83% {color:#fff100;}  91.9% {color:#f39800;} 100% {color:#e60012;}
+ }
+
+header{
+    font-size: 60px;
+    color: red;
+    -webkit-animation: blink 6s infinite;
+    animation: blink 6s infinite;
+    text-align: center;
+}
+
+.box3 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #2c2c2f;
+    background: rgba(255, 255, 255, 0.5);/*???*/
+    border: solid 3px #FFF;/*?*/
+    border-radius: 10px;/*????*/
+    
+}
+.box3 p {
+    margin: 0; 
+    padding: 0;
+}
+.honbun {
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+.label{
+    vertical-align: top;
+    margin-right: 5px;
+}
+.toukou{
+    border-top: 1px solid;
+    margin: 40px auto;
+    max-width: 975px;
+}

@@ -1,0 +1,263 @@
+Script started on Tue Jan 14 19:20:11 2020
+u306024@cse-ssh2[31]: cat open.html
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+        306024　海老原毅史
+　　γ⌒ヽ
+　　/ ･◇･)
+　∈ノ　／
+　＿_Ｗ~＿
+
+-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>わたし銀行(十日で五割)</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+        <center>
+            <table border="6" bordercolor="red" width="500">
+                <td>
+                    <marquee>
+                        口座開設ページ
+                    </marquee>
+                </td>
+            </table>
+        </center>
+    </header>
+    <div class="box3">
+        <strong>
+            名前を入力して送信ボタンを押してください。<br>
+            <form action="http://java.cse.ce.nihon-u.ac.jp/java2019f/u306024/bank" method="GET">
+                　　
+                <!-- 文字入力-->
+                名前：<input type="text" size="40" name="username" /><br>
+                <!-- OKボタン　-->
+                <input type="submit" value="OK" />
+            </form>
+            <a href="http://java.cse.ce.nihon-u.ac.jp/java2019f/u306024/index.html">キャンセル</a>
+        </strong>
+
+
+    </div>
+</body>
+
+</html>u306024@cse-ssh2[32]: cd WEB-INF
+/home10/h30/u306024/webapps/java2019f/WEB-INF
+u306024@cse-ssh2[33]: cat web.xml
+<!-- 306024 海老原毅史 -->
+<web-app>
+ <servlet>
+ <servlet-name>HelloServlet</servlet-name>
+ <servlet-class>SampleServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>HelloServlet</servlet-name>
+ <url-pattern>/greeting</url-pattern>
+ </servlet-mapping>
+
+ <servlet>
+ <servlet-name>BankServlet</servlet-name>
+ <servlet-class>BankServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>BankServlet</servlet-name>
+ <url-pattern>/bank</url-pattern>
+ </servlet-mapping>
+ </web-app>u306024@cse-ssh2[34]: cd src
+/home10/h30/u306024/webapps/java2019f/WEB-INF/src
+u306024@cse-ssh2[35]: cat BankServlet.java
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class BankServlet extends HttpServlet {
+    private Bank bank; /* 口座の管理をするオブジェクト */
+
+    public BankServlet() { /* bankを初期化する */
+        bank = new Bank();
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        /* 口座開設処理 */
+        // フォームデータの取得
+        String username = request.getParameter("username");
+        // HTML文書の書き出し
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter pw = response.getWriter();
+        pw.println("<html lang=\"ja\">");
+        pw.println("<!--306024　海老原毅史-->");
+        pw.println(
+                "<meta http-equiv=\"refresh\" content=\"3;URL=http://java.cse.ce.nihon-u.ac.jp/java2019f/u306024/index.html\">");
+        pw.println("<head>");
+        pw.println("<meta charset=\"utf-8\" />");
+        pw.println("<link rel=\"shortcut icon\" href=\"favicon.ico\">");
+        pw.println("<title>わたし銀行(十日で五割)</title>");
+        pw.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">");
+        pw.println("</head>");
+
+        pw.println("<body>");
+        pw.println("<header>");
+        pw.println("<center>");
+        pw.println("<table border=\"6\" bordercolor=\"red\" width=\"500\">");
+        pw.println("<td>");
+        pw.println("<marquee>");
+
+        if (bank.open(username) == 0) {/* 口座開設成功のHTML生成 */
+            pw.println("成功しました！");
+            pw.println("</marquee>");
+            pw.println("</td>");
+            pw.println("</table>");
+            pw.println("</center>");
+            pw.println("</header>");
+            pw.println("<div class=\"box3\">");
+            pw.println("<strong>");
+            pw.println(username + "　様　口座開設に成功しました。3秒後にリダイレクトします。");
+            pw.println("</strong>");
+        } else { /* 口座開設失敗のHTML生成 */
+            pw.println(username + "様　口座開設に失敗しました。3秒後にリダイレクトします。");
+            pw.println("</marquee>");
+            pw.println("</td>");
+            pw.println("</table>");
+            pw.println("</center>");
+            pw.println("</header>");
+            pw.println("<div class=\"box3\">");
+            pw.println("<strong>");
+            pw.println("処理失敗！3秒後にリダイレクトします。");
+            pw.println("</strong>");
+        }
+        pw.println("</div>");
+        pw.println("</body>");
+        pw.println("</html>");
+    }
+}u306024@cse-ssh2[36]: cat Account.java
+public class Account {
+    private String name; /* 口座名 */
+    private int balance; /* 口座の残高 */
+
+    public Account(String myName /* 口座名 */) {
+        this.name = myName;
+        balance = 0;
+    } /* コンストラクタ */
+
+    public int deposit(int amount/* 預金額 */) {
+        if (amount <= 0) {
+            return -3;
+        }
+        balance += amount;
+        return 0;
+
+    } /* 預金 */
+
+    public int withdraw(int amount/* 出金額 */) {
+        if (amount <= 0) {
+            return -3;
+        }
+        balance -= amount;
+        if (balance < 0) {
+            balance += amount;
+            return -1;
+        }
+        return 0;
+    } /* 払い戻し */
+
+    public int showBalance() {
+        return balance;
+    } /* 残高照会 */
+}u306024@cse-ssh2[37]: cat Bank.java
+import java.util.Hashtable;
+
+public class Bank {
+    private Hashtable<String, Account> customer; /* 口座リスト */
+
+    public Bank() {  /* 口座リストを初期化する */
+        customer = new Hashtable<String,Account>();
+        // 必要な処理があれば追加する
+    } 
+    public int open(String name /* 口座名 */) { 
+        Account man = customer.get(name);
+        if(man==null){
+            man = new Account(name);
+            customer.put(name,man);
+            return 0;
+        }else{
+            return -7;
+        } 
+     } /* 口座開設 */
+
+    public int close(String name /* 口座名 */) {
+        Account man = customer.get(name);
+        int money;
+        if(man==null){
+            return -7;
+            
+        }else{
+            money = man.showBalance();
+            if(money==0){
+                customer.remove(name);
+                return 0;
+            }else{
+                return -1;
+            }
+        } 
+     } /* 口座解約 */
+
+    public int deposit(String name /* 口座名 */, int amount /* 預金額 */) { 
+        Account man = customer.get(name);
+        if(man==null){
+            return -7;
+        }else{
+            return man.deposit(amount);
+            
+        } 
+     } /* 預金 */
+
+    public int withdraw(String name /* 口座名 */, int amount /* 引き出し額 */) { 
+        Account man = customer.get(name);
+        if(man==null){
+            return -7;
+        }else{
+            return man.withdraw(amount);
+            
+        } 
+    } /* 払い戻し*/
+
+    public int showBalance(String name /* 口座名 */) { 
+        Account man = customer.get(name);
+        if(man==null){
+            return -7;
+        }else{
+            return man.showBalance();
+            
+        }
+     } /* 残高照会 */
+
+}
+u306024@cse-ssh2[38]: ant
+Buildfile: build.xml does not exist!
+Build failed
+u306024@cse-ssh2[39]: cd ../
+/home10/h30/u306024/webapps/java2019f/WEB-INF
+u306024@cse-ssh2[40]: ant
+Buildfile: /home10/h30/u306024/webapps/java2019f/WEB-INF/build.xml
+
+compile:
+    [javac] /home10/h30/u306024/webapps/java2019f/WEB-INF/build.xml:3: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+u306024@cse-ssh2[41]: exit
+exit
+
+Script done on Tue Jan 14 19:22:41 2020

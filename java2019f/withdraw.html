@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+        306024　海老原毅史
+　　γ⌒ヽ
+　　/ ･◇･)
+　∈ノ　／
+　＿_Ｗ~＿
+
+-->
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>わたし銀行(十日で五割)</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body oncontextmenu="alert('右クリックは禁止です！');return false">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <center>
+        <table border="6" bordercolor="red" width="500">
+            <td>
+                <marquee>
+                    <span class="rainbow">引き落としページ</span>
+                </marquee>
+            </td>
+        </table>
+    </center>
+    <div class="box3">
+        <strong>名前を入力して送信ボタンを押してください。<br>
+            <form action="bank">
+                　　
+                <!-- 文字入力-->
+                名前：<input type="text" size="40" name="name" /><br>
+                <!-- 金額入力 -->
+                金額：<input type="text" size="40" name="amount" /><br>
+                <!-- OKボタン　-->
+                <input type="submit" value="OK" />
+                <input type="hidden" name="command" value="withdraw">
+            </form>
+            <input type="button" value="戻る" onclick="location.href='index.html'">
+        </strong>
+
+
+    </div>
+</body>
+
+</html>

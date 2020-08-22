@@ -1,0 +1,20 @@
+<!-- 306024 海老原毅史 -->
+<web-app>
+ <servlet>
+ <servlet-name>HelloServlet</servlet-name>
+ <servlet-class>SampleServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>HelloServlet</servlet-name>
+ <url-pattern>/greeting</url-pattern>
+ </servlet-mapping>
+
+ <servlet>
+ <servlet-name>BankServlet</servlet-name>
+ <servlet-class>BankServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>BankServlet</servlet-name>
+ <url-pattern>/bank</url-pattern>
+ </servlet-mapping>
+ </web-app>
